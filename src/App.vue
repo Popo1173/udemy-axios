@@ -5,7 +5,7 @@
     <input id="name" v-model="name" type="text">
     <br /><br />
     <label for="comment">コメント</label>
-    <textarea id="comment" v-model="name"></textarea>
+    <textarea id="comment" v-model="comment"></textarea>
     <br /><br />
     <button @click="createComment">コメントをサーバーに送る</button>
     <h2>掲示板</h2>
@@ -14,6 +14,7 @@
 
 <script>
 import axios from "axios";
+
 export default {
   data () {
     return {
@@ -24,19 +25,31 @@ export default {
   methods: {
     //非同期の処理
     createComment() {
-      //postメソッド 第一引数:postするURL,第二引数はデータ、第三引数はオプション
-      axios.post('https://firestore.googleapis.com/v1/projects/vuejs-http-d2ba0/databases/(default)/documents/cities/comments',
-      {
-        //オブジェクト（ファイヤーベースの形式で送る
-        fileds: {
-          name: {
-            stringValue: this.name
-          },
-          comment: {
-            stringValue: this.comment
+      //postメソッド 第一引数:postするURL,第二引数はデータをオブジェクト、第三引数はオプション
+      axios.post(
+        'https://firestore.googleapis.com/v1/projects/vuejs-http-d2ba0/databases/(default)/documents/cities/comments',
+        {
+          //オブジェクト（ファイヤーベースの形式で送る
+          fields: {
+            name: {
+              stringValue: this.name
+            },
+            comment: {
+              stringValue: this.comment
+            }
           }
         }
+      )
+      //postした結果を返す
+      .then(response => {
+        console.log(response);
+      })
+      //エラーの場合
+      .catch(error => {
+        console.log(error);
       });
+    this.name ="";
+    this.comment ="";
     }
   }
 }
