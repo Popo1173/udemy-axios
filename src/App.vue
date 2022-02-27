@@ -25,7 +25,7 @@ export default {
     //非同期の処理
     createComment() {
       //postメソッド 第一引数:postするURL,第二引数はデータ、第三引数はオプション
-      axios.post('https://firestore.googleapis.com/v1/projects/vuejs-http-d2ba0/databases/(default)/documents/cities/comments',っっっp
+      axios.post('https://firestore.googleapis.com/v1/projects/vuejs-http-d2ba0/databases/(default)/documents/cities/comments',
       {
         //オブジェクト（ファイヤーベースの形式で送る
         fileds: {
